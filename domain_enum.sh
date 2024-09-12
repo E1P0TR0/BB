@@ -299,7 +299,7 @@ domains_validation(){
 
     cat $domains | awk -F':' '{print $1}' | grep -vE '\*|@' | sort -u \
 	    | dnsx -silent -no-color -t 200 -r $resolvers_file \
-	    | /home/marss/go/bin/httpx -silent -no-color -cname -title -location -web-server -tech-detect -content-type -random-agent -content-length -threads 200 -o $temp_file
+	    | httpx -silent -no-color -cname -title -location -web-server -tech-detect -content-type -random-agent -content-length -threads 200 -o $temp_file # httpx python conflicts, use full go path /HOME/XNAME/go/bin/httpx
 
     # add to main list and save current alive domains apart
     echo "[+] New alive domains found: $(add_new_data "$temp_file" "$alive_file" "$domains_tmp")"
